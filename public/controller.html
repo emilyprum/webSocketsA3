@@ -28,6 +28,9 @@
             //https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector 
             //note that querySelector can also be used on elements so that you only search for their children
             //instead of all elements within teh "document"
+
+
+            //these activate the function
             document.querySelector('#red').addEventListener('click', function() {
                 socket.emit('red');
             });

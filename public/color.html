@@ -26,7 +26,7 @@
             </a-entity>
             <!--lights-->
             <a-entity light="type:directional; castShadow:true; intensity:0.2; shadowBias:-0.00001; shadowMapWidth:1024; shadowMapHeight:1024;" position="-23 28 -50"></a-entity>
-            <a-entity light="type:ambient; intensity:0.7; color:#F5D0A0;"></a-entity>
+            <a-entity light="type:ambient; intensity:0.7; color:#FFF;"></a-entity>
 
                        
    
@@ -47,7 +47,24 @@
                 console.log("connected!");
             });
 
+            // recieving stuff that goes into color-change, passed through app.js
             socket.on('color_change', function(data) {
+                let colorStr = 'rbg(' + data.r + ','+data.g+ ', '+ data.b+ ')';
+                
+                console.log('color change event: ' + colorStr);
+                const Context_AF = this;
+
+                //create element, than add attributes you want. If you are creating many =you want to 
+                //consider "pooling" elements (i.e. not creating/deleting a bunch but just hiding/showing a certain MAX amount with visibility="true" or "false" )
+                //see here: https://www.html5rocks.com/en/tutorials/speed/static-mem-pools/ 
+                //see here: https://aframe.io/docs/0.8.0/components/pool.html
+                let target = document.createElement('a-sphere');
+               
+                target.setAttribute('material', {color: "white"});
+                target.setAttribute('position', {x:2, y:1, z:-20});
+                
+                let scene = document.querySelector('a-scene');
+                scene.appendChild(target);
                 
             });
         </script>

@@ -28,7 +28,9 @@ socketIO.on('connection', function(socket) {
     //custom events
     //socket = one client
     //socketIO.sockets = all clients
-    socket.on('red', function(data) {
+
+    // these are the functions that get passed.. this passes in the color
+    socket.on('red', function(data) {  
         console.log('red event heard');
         socketIO.sockets.emit('color_change', {r:255, g:0, b:0});
     });
