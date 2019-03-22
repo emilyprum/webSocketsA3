@@ -30,19 +30,9 @@ socketIO.on('connection', function(socket) {
     //socketIO.sockets = all clients
 
     // these are the functions that get passed.. this passes in the color
-    socket.on('red', function(data) {  
-        console.log('red event heard');
-        socketIO.sockets.emit('color_change', {r:255, g:0, b:0});
-    });
-
-    socket.on('green', function(data) {
-        console.log('green event heard');
-        socketIO.sockets.emit('color_change', {r:0, g:255, b:0});
-    });
-
-    socket.on('blue', function(data) {
-        console.log('blue event heard');
-        socketIO.sockets.emit('color_change', {r:0, g:0, b:255});
+    socket.on('createTarget', function(data) {  
+        console.log('createTarget');
+        socketIO.sockets.emit('newTarget', {r:255, g:0, b:0});
     });
 });
 

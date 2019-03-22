@@ -48,7 +48,7 @@
             });
 
             // recieving stuff that goes into color-change, passed through app.js
-            socket.on('color_change', function(data) {
+            socket.on('newTarget', function(data) {
                 let colorStr = 'rbg(' + data.r + ','+data.g+ ', '+ data.b+ ')';
                 
                 console.log('color change event: ' + colorStr);
