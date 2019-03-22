@@ -86,15 +86,16 @@
             deleteMyself : function() {
                 const Context_AF = this;
                 Context_AF.el.parentNode.removeChild(Context_AF.el); 
+                socket.emit('removeTarget');
                 //note memmory may stay aroudn until "garbage collected" so consider pooling instead of deleting. See note in create-cow element
             }
 
            
             });
 
-            document.querySelector('#target').addEventListener('click', function() {
-                socket.emit('removeTarget');
-            });
+            
+                
+          
         </script>
     </body>
 </html>
