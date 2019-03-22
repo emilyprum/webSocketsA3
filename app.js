@@ -36,10 +36,10 @@ socketIO.on('connection', function(socket) {
         
     });
 
-
-    socket.on('deleteTarget', function(data) {  
+    // passing 1 to the delete target function in controller
+    socket.on('removeTarget', function(data) {  
         console.log('player has hit the target');
-        socketIO.sockets.emit('delteTarget', 1);
+        socketIO.sockets.emit('addPoints', 1);
         
     });
 });

@@ -7,7 +7,7 @@
         
         <!-- some very nice color buttons -->
         <button id="createTarget" style="background-color:white; color:darkcyan;">Create Target</button>
-
+        
         <!-- scripts go to bottom if you want them to execute AFTER the rest of the web page renders -->
         <script src="/socket.io/socket.io.js"></script>
         <script>
@@ -27,7 +27,7 @@
             //note that querySelector can also be used on elements so that you only search for their children
             //instead of all elements within teh "document"
 
-
+            var points = 0;
             //these activate the function
             document.querySelector('#createTarget').addEventListener('click', function() {
                 socket.emit('createTarget');
@@ -37,7 +37,7 @@
                 document.querySelector('#points');
 
                 {
-                    
+                    points += data
 
                 }
                 

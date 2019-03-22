@@ -62,14 +62,38 @@
                 target.setAttribute('id', "target");
                 target.setAttribute('material', {color: "white"});
                 target.setAttribute('position', {x:2, y:1, z:-20});
+                target.setAttribute('deletecomponent', {});
                 
                 let scene = document.querySelector('a-scene');
                 scene.appendChild(target);
                 
             });
+            AFRAME.registerComponent('deletecomponent', {
+            schema: {},
+            init : function() {
+                const Context_AF = this;
+
+                
+
+                Context_AF.el.addEventListener('click', function(event) {
+                    console.log("click");
+                    //object clicked - lets create a cow!
+                    Context_AF.deleteMyself();
+
+                
+                });
+            },
+            deleteMyself : function() {
+                const Context_AF = this;
+                Context_AF.el.parentNode.removeChild(Context_AF.el); 
+                //note memmory may stay aroudn until "garbage collected" so consider pooling instead of deleting. See note in create-cow element
+            }
+
+           
+            });
 
             document.querySelector('#target').addEventListener('click', function() {
-                socket.emit('deleteTarget');
+                socket.emit('removeTarget');
             });
         </script>
     </body>
