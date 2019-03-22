@@ -33,6 +33,14 @@ socketIO.on('connection', function(socket) {
     socket.on('createTarget', function(data) {  
         console.log('createTarget');
         socketIO.sockets.emit('newTarget', {r:255, g:0, b:0});
+        
+    });
+
+
+    socket.on('deleteTarget', function(data) {  
+        console.log('player has hit the target');
+        socketIO.sockets.emit('delteTarget', 1);
+        
     });
 });
 

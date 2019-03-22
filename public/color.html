@@ -59,13 +59,17 @@
                 //see here: https://www.html5rocks.com/en/tutorials/speed/static-mem-pools/ 
                 //see here: https://aframe.io/docs/0.8.0/components/pool.html
                 let target = document.createElement('a-sphere');
-               
+                target.setAttribute('id', "target");
                 target.setAttribute('material', {color: "white"});
                 target.setAttribute('position', {x:2, y:1, z:-20});
                 
                 let scene = document.querySelector('a-scene');
                 scene.appendChild(target);
                 
+            });
+
+            document.querySelector('#target').addEventListener('click', function() {
+                socket.emit('deleteTarget');
             });
         </script>
     </body>
