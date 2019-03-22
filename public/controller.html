@@ -7,7 +7,11 @@
         
         <!-- some very nice color buttons -->
         <button id="createTarget" style="background-color:white; color:darkcyan;">Create Target</button>
-        
+        <p>The other player has hit the target</p>
+        <p id = "playerPoints"></p>
+        <p>times</p>
+
+
         <!-- scripts go to bottom if you want them to execute AFTER the rest of the web page renders -->
         <script src="/socket.io/socket.io.js"></script>
         <script>
@@ -33,12 +37,16 @@
                 socket.emit('createTarget');
             });
             
-            socket.on('deleteTarget', function(data) {
+            socket.on('addPoints', function(data) {
                 document.querySelector('#points');
 
                 {
-                    points += data
-
+                    console.log("working");
+                    points += data;
+                    document.getElementById("playerPoints").innerHTML =points ;
+                    return points;
+                   
+                    
                 }
                 
             });
