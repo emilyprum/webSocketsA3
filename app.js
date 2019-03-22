@@ -32,7 +32,21 @@ socketIO.on('connection', function(socket) {
     // these are the functions that get passed.. this passes in the color
     socket.on('createTarget', function(data) {  
         console.log('createTarget');
-        socketIO.sockets.emit('newTarget', {r:255, g:0, b:0});
+
+
+        var xpos = Math.random() * (10 - 0) + 0;
+        var ypos = Math.random() * (10 - (-5)) + (-5);
+        var zpos = Math.random() * (40 - (-20)) + (-20);
+        socketIO.sockets.emit('newTarget', {xpos, ypos, zpos});
+        
+    });
+
+    socket.on('createFakeTarget', function(data) {  
+        console.log('createFakeTarget');
+        var xpos = Math.random() * (10 - 1) + 0;
+        var ypos = Math.random() * (12 - (-3)) + (-3);
+        var zpos = Math.random() * (40 - (-20)) + (-20);
+        socketIO.sockets.emit('newFakeTarget', {xpos, ypos, zpos});
         
     });
 

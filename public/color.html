@@ -49,7 +49,7 @@
 
             // recieving stuff that goes into color-change, passed through app.js
             socket.on('newTarget', function(data) {
-                let colorStr = 'rbg(' + data.r + ','+data.g+ ', '+ data.b+ ')';
+                let colorStr = 'rbg(' + data.xpos + ','+data.ypos+ ', '+ data.zpos+ ')';
                 
                 console.log('color change event: ' + colorStr);
                 const Context_AF = this;
@@ -61,11 +61,35 @@
                 let target = document.createElement('a-sphere');
                 target.setAttribute('id', "target");
                 target.setAttribute('material', {color: "white"});
-                target.setAttribute('position', {x:2, y:1, z:-20});
+                target.setAttribute('position', {x:data.xpos, y:data.ypos, z:data.zpos});
                 target.setAttribute('deletecomponent', {});
                 
                 let scene = document.querySelector('a-scene');
                 scene.appendChild(target);
+                
+            });
+
+
+
+
+            socket.on('newFakeTarget', function(data) {
+                let colorStr = 'rbg(' + data.xpos + ','+data.ypos+ ', '+ data.zpos+ ')';
+                
+                console.log('color change event: ' + colorStr);
+                const Context_AF = this;
+
+                //create element, than add attributes you want. If you are creating many =you want to 
+                //consider "pooling" elements (i.e. not creating/deleting a bunch but just hiding/showing a certain MAX amount with visibility="true" or "false" )
+                //see here: https://www.html5rocks.com/en/tutorials/speed/static-mem-pools/ 
+                //see here: https://aframe.io/docs/0.8.0/components/pool.html
+                let fakeTarget = document.createElement('a-sphere');
+                fakeTarget.setAttribute('id', "fakeTarget");
+                fakeTarget.setAttribute('material', {color: "red"});
+                fakeTarget.setAttribute('position', {x:data.xpos, y:data.ypos, z:data.zpos});
+                fakeTarget.setAttribute('delete', {});
+                
+                let scene = document.querySelector('a-scene');
+                scene.appendChild(fakeTarget);
                 
             });
             AFRAME.registerComponent('deletecomponent', {
@@ -92,7 +116,30 @@
 
            
             });
+            AFRAME.registerComponent('delete', {
+            schema: {},
+            init : function() {
+                const Context_AF = this;
 
+                
+
+                Context_AF.el.addEventListener('click', function(event) {
+                    console.log("click");
+                    //object clicked - lets create a cow!
+                    Context_AF.delete();
+
+                
+                });
+            },
+            delete : function() {
+                const Context_AF = this;
+                Context_AF.el.parentNode.removeChild(Context_AF.el); 
+                
+                //note memmory may stay aroudn until "garbage collected" so consider pooling instead of deleting. See note in create-cow element
+            }
+
+           
+            });
             
                 
           
