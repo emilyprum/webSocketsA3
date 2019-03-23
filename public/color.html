@@ -78,10 +78,7 @@
                 console.log('color change event: ' + colorStr);
                 const Context_AF = this;
 
-                //create element, than add attributes you want. If you are creating many =you want to 
-                //consider "pooling" elements (i.e. not creating/deleting a bunch but just hiding/showing a certain MAX amount with visibility="true" or "false" )
-                //see here: https://www.html5rocks.com/en/tutorials/speed/static-mem-pools/ 
-                //see here: https://aframe.io/docs/0.8.0/components/pool.html
+                 // below is equivalent to <a-sphere delete id = "fakeTarget" material= "color:red" position="xpos ypos zpos">
                 let fakeTarget = document.createElement('a-sphere');
                 fakeTarget.setAttribute('id', "fakeTarget");
                 fakeTarget.setAttribute('material', {color: "red"});
@@ -111,7 +108,7 @@
                 const Context_AF = this;
                 Context_AF.el.parentNode.removeChild(Context_AF.el); 
                 socket.emit('removeTarget');
-                //note memmory may stay aroudn until "garbage collected" so consider pooling instead of deleting. See note in create-cow element
+                
             }
 
            
@@ -134,8 +131,7 @@
             delete : function() {
                 const Context_AF = this;
                 Context_AF.el.parentNode.removeChild(Context_AF.el); 
-                
-                //note memmory may stay aroudn until "garbage collected" so consider pooling instead of deleting. See note in create-cow element
+                socket.emit('removePoint');
             }
 
            

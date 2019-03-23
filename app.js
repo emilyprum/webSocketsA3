@@ -56,6 +56,11 @@ socketIO.on('connection', function(socket) {
         socketIO.sockets.emit('addPoints', 1);
         
     });
+    socket.on('removePoint', function(data) {  
+        console.log('player has hit the target');
+        socketIO.sockets.emit('addPoints', -1);
+        
+    });
 });
 
 //finally, start server
